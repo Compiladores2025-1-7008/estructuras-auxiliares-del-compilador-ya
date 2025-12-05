@@ -31,8 +31,8 @@ namespace
         auto it = table.find(id);
         if (it == table.end())
         {
-            // Si no lo encuentra lanza una excepción
-            throw std::runtime_error("Symbol not found: " + id);
+            // Si no lo encuentra lanza una excepción personalizada
+            throw SymbolNotFoundError(id);
         }
         // el iterador nos devuelve llave y valor, regresamos el valor (SymbolEntry)
         return it->second;

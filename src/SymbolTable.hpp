@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <optional>
+#include <stdexcept>
 
 enum class Category
 {
@@ -12,6 +13,17 @@ enum class Category
     FUNCTION,
     PARAM
 };
+
+/*
+ * Definición de una expeción personalizada para un mejor manejo de errores
+ */
+class SymbolNotFoundError : public std::runtime_error
+{
+public:
+    explicit SymbolNotFoundError(const std::string &id)
+        : std::runtime_error("Symbol not found: " + id) {}
+};
+
 // Recordatorio de cómo se ve la tabla de símbolos:
 // id | tipo | categoría | dirección | lista de parámetros
 struct SymbolEntry
