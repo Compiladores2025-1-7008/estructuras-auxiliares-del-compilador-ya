@@ -1,18 +1,34 @@
 #include "CodeGenerator.hpp"
 #include <gtest/gtest.h>
 
-TEST(CodeGeneratorTest, GenerateNewTemporary) {
-    CodeGenerator cg;
+// Prueba que los temporales se generen de forma secuencial
+TEST(CodeGeneratorTest, GeneratesSequentialTemps) {
+    CodeGenerator gen;
 
-    EXPECT_EQ(cg.newTemp(), "t0");
-    EXPECT_EQ(cg.newTemp(), "t1");
-    EXPECT_EQ(cg.newTemp(), "t2");
+    EXPECT_EQ(gen.newTemp(), "t0");
+    EXPECT_EQ(gen.newTemp(), "t1");
+    EXPECT_EQ(gen.newTemp(), "t2");
 }
 
-TEST(CodeGeneratorTest, GenerateNewLabel) {
-    CodeGenerator cg;
+// Prueba que las etiquetas se generan de forma secuencial
+TEST(CodeGeneratorTest, GeneratesSequentialLabels) {
+    CodeGenerator gen;
 
-    EXPECT_EQ(cg.newLabel(), "L0");
-    EXPECT_EQ(cg.newLabel(), "L1");
-    EXPECT_EQ(cg.newLabel(), "L2");
+    EXPECT_EQ(gen.newLabel(), "L0");
+    EXPECT_EQ(gen.newLabel(), "L1");
+    EXPECT_EQ(gen.newLabel(), "L2");
+}
+
+
+// Prueba que que se reincian ambos contadores correctamente
+TEST(CodeGeneratorTest, ResetReinitializesCounters) {
+    CodeGenerator gen;
+
+    gen.newTemp(); 
+    gen.newLabel(); 
+
+    gen.reset();
+
+    EXPECT_EQ(gen.newTemp(), "t0");
+    EXPECT_EQ(gen.newLabel(), "L0");
 }
